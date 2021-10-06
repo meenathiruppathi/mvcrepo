@@ -20,6 +20,10 @@ namespace mvcapplication.Controllers
 
         public IActionResult Index()
         {
+            int hour = DateTime.Now.Hour;
+            ViewBag.greeting = hour < 12 ? "Good Morning, Time is" + DateTime.Now.ToShortTimeString() : "Good Afternoon. Time is" + DateTime.Now.ToShortTimeString();
+
+
             return View();
         }
 
