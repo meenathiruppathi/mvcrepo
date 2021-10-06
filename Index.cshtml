@@ -2,9 +2,52 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+<body bgcolor="#66ffcc">
+    <div>
+        <table>
+            <tr>
+                <th></th>
+                <th>
+                    Nmae
+                </th>
+                <th>
+                    Email
+                </th>
+            </tr>
+            <% foreach (var sonal in Model) { %>
+            <tr>
+                <td>
+                    <%= Html.ActionLink("Record", "Record",sonal )%>
+                </td>
+                <td>
+                    <%= Html.Encode(sonal.Name) %>
+                </td>
+                <td>
+                    <%= Html.Encode(sonal.Email) %>
+                </td>
+            </tr>
+            <% } %>
+        </table>
+        <p>
+            <%= Html.ActionLink("Login Now", "Login") %>
+        </p>
+    </div>
+</body>
+
 <div class="text-center">
     <h1 class="display-4">Welcome to the world</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>hlo world</p>
+
+    <div>
+
+        @ViewBag.Greeting
+
+    </div>
+
+
+
+
 
 </div>
