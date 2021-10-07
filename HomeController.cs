@@ -1,41 +1,52 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using mvcapplication.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using System.Configuration;
+using System.Data.SqlClient;
+using WebApplication1.Models;
 
-namespace mvcapplication.Controllers
+namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public ActionResult Index()
         {
-            _logger = logger;
+            List<Employee> employeeList = new List<Employee>();
+            string str = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(str);
+            SqlCommand cmd = new SqlCommand("Select * from employees", con);
+            cmd.CommandType = System.Data.CommandType.Text;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                var employee1 = new Employee();
+                employee1.Name = rdr["empname"].ToString();
+                employee1.EmployeeId = Convert.ToInt32(rdr["empid"]);
+                employeeList.Add(employee1);
+                
+
+
+            }
+            ViewBag.Message = "Your contact page.";
+
+            return View(employeeList);
+
+            
         }
 
-        public IActionResult Index()
+        public ActionResult About()
         {
-            int hour = DateTime.Now.Hour;
-            ViewBag.greeting = hour < 12 ? "Good Morning, Time is" + DateTime.Now.ToShortTimeString() : "Good Afternoon. Time is" + DateTime.Now.ToShortTimeString();
-
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public IActionResult Privacy()
+        public ActionResult Contact()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
