@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
+    <script src="https://devscripts.logixhealth.com/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src=@(string.Format("{0}{1}",cdnBaseAddress,"/js/lib/select.min.js")) asp-append-version="true"></script>
+        <script src=@(string.Format("{0}{1}",cdnBaseAddress,"/js/lib/jquery.dataTables.min.js")) asp-append-version="true"></script>
+        <script src=@(string.Format("{0}{1}",cdnBaseAddress,"/js/lib/dataTables.bootstrap4.min.js")) asp-append-version="true"></script>
+        <script src=@(string.Format("{0}{1}",cdnBaseAddress,"/js/lib/dataTables.select.min.js")) asp-append-version="true"></script>
+        <script src=@(string.Format("{0}{1}",cdnBaseAddress,"/js/lib/dataTables.checkboxes.min.js")) asp-append-version="true"></script>*@
+
+    @*<link href="~/css/site.css" rel="stylesheet" />*@
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", required: false)
+    }
+
+</body>
+</html>
